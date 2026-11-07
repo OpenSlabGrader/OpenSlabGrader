@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>OpenSlabGrader</title>
+<meta name="description" content="Open-source grading of trading cards from flatbed scans. Measured, recorded, repeatable.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect x='6' y='3' width='20' height='26' rx='3' fill='none' stroke='%231f6f5f' stroke-width='3'/%3E%3C/svg%3E">
+<style>
+  :root {
+    --bg: #f6f5f1; --fg: #1b1b1a; --muted: #5d5d58; --line: #dedcd4;
+    --accent: #1f6f5f; --accent-ink: #ffffff; --card: #ffffff;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #141513; --fg: #ecece6; --muted: #a2a29b; --line: #2b2c29;
+      --accent: #5fbfa7; --accent-ink: #0f1f1b; --card: #1c1d1b;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #141513; --fg: #ecece6; --muted: #a2a29b; --line: #2b2c29;
+    --accent: #5fbfa7; --accent-ink: #0f1f1b; --card: #1c1d1b;
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0; background: var(--bg); color: var(--fg);
+    font: 17px/1.55 -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  }
+  .wrap { max-width: 760px; margin: 0 auto; padding: 0 16px; }
+  header { padding: 28px 0 12px; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+  .brand { display: flex; align-items: center; gap: 10px; font-weight: 700; letter-spacing: .01em; text-decoration: none; color: var(--fg); }
+  .brand svg { width: 26px; height: 26px; }
+  nav a { color: var(--muted); text-decoration: none; margin-left: 18px; font-size: 15px; }
+  nav a:hover { color: var(--fg); }
+  .hero { padding: 56px 0 40px; border-bottom: 1px solid var(--line); }
+  .hero h1 { font-size: clamp(34px, 6vw, 52px); line-height: 1.08; margin: 0 0 18px; letter-spacing: -.02em; }
+  .hero p { font-size: 20px; color: var(--muted); margin: 0 0 28px; max-width: 600px; }
+  .status { display: inline-block; font-size: 13px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase;
+            color: var(--accent); border: 1px solid var(--accent); border-radius: 999px; padding: 4px 12px; margin-bottom: 22px; }
+  .actions { display: flex; flex-wrap: wrap; gap: 12px; }
+  .btn { display: inline-block; padding: 11px 18px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 16px; }
+  .btn.primary { background: var(--accent); color: var(--accent-ink); }
+  .btn.quiet { color: var(--fg); border: 1px solid var(--line); background: var(--card); }
+  section { padding: 44px 0; border-bottom: 1px solid var(--line); }
+  section:last-of-type { border-bottom: 0; }
+  h2 { font-size: 24px; margin: 0 0 18px; letter-spacing: -.01em; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; }
+  .tile { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 18px; }
+  .tile h3 { margin: 0 0 8px; font-size: 17px; }
+  .tile p { margin: 0; color: var(--muted); font-size: 15.5px; }
+  ol { padding-left: 22px; margin: 0; }
+  ol li { margin: 8px 0; }
+  ol li strong { font-weight: 600; }
+  footer { padding: 28px 0 40px; color: var(--muted); font-size: 14px; display: flex; flex-wrap: wrap; gap: 8px 24px; }
+  footer a { color: var(--muted); }
+  a { color: var(--accent); }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <a class="brand" href="/">
+      <svg viewBox="0 0 32 32" aria-hidden="true"><rect x="6" y="3" width="20" height="26" rx="3" fill="none" stroke="currentColor" stroke-width="2.5"/><rect x="10" y="8" width="12" height="9" rx="1" fill="currentColor" opacity=".35"/></svg>
+      OpenSlabGrader
+    </a>
+    <nav>
+      <a href="#how">How it works</a>
+      <a href="#who">Who it is for</a>
+      <a href="https://github.com/OpenSlabGrader/OpenSlabGrader">GitHub</a>
+    </nav>
+  </header>
+
+  <div class="hero">
+    <span class="status">Under development</span>
+    <h1>Card grading you can check.</h1>
+    <p>OpenSlabGrader measures a trading card from an ordinary flatbed scan instead of eyeballing it. Every number is written down with how it was measured, so a grade can be rerun and verified by anyone.</p>
+    <div class="actions">
+      <a class="btn primary" href="https://github.com/OpenSlabGrader/OpenSlabGrader">Follow on GitHub</a>
+      <a class="btn quiet" href="mailto:hello@openslabgrader.com">hello@openslabgrader.com</a>
+    </div>
+  </div>
+
+  <section id="how">
+    <h2>How it works</h2>
+    <ol>
+      <li><strong>Scan.</strong> The card goes on a consumer flatbed scanner. No special hardware.</li>
+      <li><strong>Measure.</strong> The software measures what graders look at: centering, corners, edges and the cut.</li>
+      <li><strong>Record.</strong> Each measurement is saved with the scan and the method that produced it.</li>
+      <li><strong>Verify.</strong> Anyone with the saved scan can rerun the grade and get the same numbers.</li>
+    </ol>
+  </section>
+
+  <section id="who">
+    <h2>Who it is for</h2>
+    <div class="grid">
+      <div class="tile"><h3>Shops and graders</h3><p>A grade with its measurements attached, not an opinion a customer has to take on trust.</p></div>
+      <div class="tile"><h3>Collectors</h3><p>Check a card at home before buying, selling or sending it away.</p></div>
+      <div class="tile"><h3>Developers</h3><p>Open source under Apache 2.0. Read it, run it, improve it.</p></div>
+    </div>
+  </section>
+
+  <section id="status">
+    <h2>Status</h2>
+    <p>The first release is being prepared. The code is not yet published. This site and the <a href="https://github.com/OpenSlabGrader/OpenSlabGrader">repository</a> hold the name, the license and this note until it is. English-language cards first; others as the project grows.</p>
+  </section>
+
+  <footer>
+    <span>© 2026 OpenSlabGrader</span>
+    <a href="https://github.com/OpenSlabGrader/OpenSlabGrader/blob/main/LICENSE">Apache License 2.0</a>
+    <a href="mailto:hello@openslabgrader.com">Contact</a>
+  </footer>
+</div>
+</body>
+</html>
