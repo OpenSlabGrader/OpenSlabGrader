@@ -24,4 +24,4 @@ Apache License 2.0. See [LICENSE](LICENSE).
 
 ## Contact
 
-Open an issue here, or write to hello@openslabgrader.com.
+Open an issue here, or write to info@ironcladslabs.com.
